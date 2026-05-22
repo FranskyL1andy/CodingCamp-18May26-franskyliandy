@@ -1,0 +1,514 @@
+/* ============================================================
+   CSS Custom Properties — Dark mode (default)
+   ============================================================ */
+:root {
+  --color-bg:             #1a1a2e;
+  --color-surface:        #16213e;
+  --color-surface-alt:    #0f3460;
+  --color-border:         #2a2a4a;
+  --color-text:           #e0e0f0;
+  --color-text-secondary: #a0a0c0;
+  --color-accent:         #e94560;
+  --color-accent-hover:   #c73652;
+  --color-success:        #4caf50;
+  --color-warning-bg:     #7a3a00;
+  --color-warning-text:   #ffe0b2;
+  --color-error:          #ff6b6b;
+  --color-disabled:       #555577;
+  --color-disabled-bg:    #2a2a4a;
+  --color-duplicate-bg:   #3a2a00;
+  --color-duplicate-text: #ffd580;
+
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+
+  --font-size-base: 16px;
+  --font-size-sm:   14px;
+  --font-size-xs:   12px;
+  --font-size-lg:   20px;
+  --font-size-xl:   28px;
+  --font-size-2xl:  40px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --transition-fast: 150ms ease;
+}
+
+/* ============================================================
+   Light mode overrides
+   ============================================================ */
+[data-theme="light"] {
+  --color-bg:             #f0f2f5;
+  --color-surface:        #ffffff;
+  --color-surface-alt:    #e8eaf0;
+  --color-border:         #d0d4e0;
+  --color-text:           #1a1a2e;
+  --color-text-secondary: #555577;
+  --color-accent:         #c0392b;
+  --color-accent-hover:   #96281b;
+  --color-success:        #27ae60;
+  --color-warning-bg:     #fff3cd;
+  --color-warning-text:   #7a4a00;
+  --color-error:          #c0392b;
+  --color-disabled:       #aaaacc;
+  --color-disabled-bg:    #e0e0f0;
+  --color-duplicate-bg:   #fff8e1;
+  --color-duplicate-text: #7a5a00;
+}
+
+/* ============================================================
+   Reset / Base
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { overflow-x: hidden; }
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  min-width: 320px;
+  overflow-x: hidden;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+/* ============================================================
+   Top bar — theme toggle + app title
+   ============================================================ */
+#app-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+#app-topbar .app-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.02em;
+}
+
+#theme-toggle {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  padding: var(--space-xs) var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  transition: background-color var(--transition-fast);
+}
+
+#theme-toggle:hover { background-color: var(--color-border); }
+
+/* ============================================================
+   Storage Warning Banner
+   ============================================================ */
+#app-banner {
+  display: none;
+  width: 100%;
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-align: center;
+  padding: var(--space-sm) var(--space-md);
+}
+
+/* ============================================================
+   App Grid — mobile-first single column
+   ============================================================ */
+#app-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  width: 100%;
+}
+
+/* ============================================================
+   Widget Cards
+   ============================================================ */
+#app-grid > section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  min-width: 0;
+  overflow: hidden;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+/* ============================================================
+   Greeting Widget
+   ============================================================ */
+#greeting-widget { text-align: center; }
+
+#greeting-widget .greeting-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+#greeting-widget .greeting-name-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--color-border);
+  border-radius: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  text-align: center;
+  width: 160px;
+  padding: 2px var(--space-xs);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+#greeting-widget .greeting-name-input:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+#greeting-widget .greeting-name-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+#greeting-widget .time-display {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+#greeting-widget .date-display {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+#greeting-widget .greeting-text {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-top: var(--space-sm);
+  color: var(--color-accent);
+}
+
+/* ============================================================
+   Timer Widget
+   ============================================================ */
+#timer-widget { text-align: center; }
+
+#timer-widget .timer-display {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+}
+
+#timer-widget .timer-status {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  min-height: 1.4em;
+  margin-top: var(--space-xs);
+}
+
+#timer-widget .timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-top: var(--space-md);
+}
+
+/* ============================================================
+   To-Do Widget
+   ============================================================ */
+#todo-widget .todo-input-row {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+#todo-widget .todo-input-row input {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+#todo-widget .todo-list {
+  list-style: none;
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+#todo-widget .todo-actions {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Task item */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.task-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.task-description {
+  flex: 1 1 0;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.task-item.completed .task-description {
+  text-decoration: line-through;
+  color: var(--color-text-secondary);
+}
+
+.task-edit-input {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.task-actions {
+  display: flex;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+/* Duplicate warning */
+.duplicate-warning {
+  font-size: var(--font-size-xs);
+  background-color: var(--color-duplicate-bg);
+  color: var(--color-duplicate-text);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+/* ============================================================
+   Links Widget
+   ============================================================ */
+#links-widget .links-add-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+#links-widget .links-list {
+  list-style: none;
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.link-open-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  padding: 0;
+}
+
+.link-open-btn:hover { color: var(--color-accent); }
+
+.link-label {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.link-error {
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  margin-top: var(--space-xs);
+}
+
+/* ============================================================
+   Shared Form Controls
+   ============================================================ */
+input[type="text"],
+input[type="url"] {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  padding: var(--space-sm) var(--space-md);
+  width: 100%;
+  min-width: 0;
+  outline: none;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus {
+  border-color: var(--color-accent);
+}
+
+/* ============================================================
+   Shared Button Styles
+   ============================================================ */
+button {
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+  white-space: nowrap;
+}
+
+button.btn-primary {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+button.btn-primary:hover:not(:disabled) { background-color: var(--color-accent-hover); }
+
+button.btn-secondary {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+button.btn-secondary:hover:not(:disabled) { background-color: var(--color-border); }
+
+button.btn-danger {
+  background-color: transparent;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-xs);
+}
+
+button.btn-danger:hover:not(:disabled) {
+  background-color: var(--color-error);
+  color: #ffffff;
+}
+
+button.btn-icon {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  padding: var(--space-xs);
+  font-size: var(--font-size-sm);
+  line-height: 1;
+}
+
+button.btn-icon:hover { color: var(--color-accent); }
+
+button:disabled {
+  background-color: var(--color-disabled-bg);
+  color: var(--color-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================================
+   Utility classes
+   ============================================================ */
+.label-secondary,
+.field-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.error-message {
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  margin-top: var(--space-xs);
+}
+
+.widget-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+
+.placeholder-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: var(--space-md) 0;
+}
+
+/* ============================================================
+   Responsive — ≥ 768 px
+   ============================================================ */
+@media (min-width: 768px) {
+  #app-grid { grid-template-columns: 1fr 1fr; }
+
+  #greeting-widget,
+  #timer-widget { grid-column: 1 / -1; }
+}
+
+/* ============================================================
+   Responsive — ≥ 1280 px
+   ============================================================ */
+@media (min-width: 1280px) {
+  #app-grid {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--space-xl);
+  }
+}
